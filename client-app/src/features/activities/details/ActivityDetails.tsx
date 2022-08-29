@@ -1,12 +1,14 @@
-import { link } from "fs";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { Button, Card, Image } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponents";
 import { useStore } from "../../../stores/store";
+import ActivityDetailedHeader from "./ActivityDetailHeader";
+import ActivityDetailInfo from "./ActivityDetailInfo";
+import ActivityDetailChat from "./ActivityDetailedChat";
+import ActivityDetailSidebar from "./ActivityDetailSidebar";
 
 
 export default observer(function ActivityDetails() {
@@ -25,23 +27,15 @@ export default observer(function ActivityDetails() {
     if (loadingInitial || !activity) return <LoadingComponent contents={""} />
 
     return (
-        <Card fluid>
-            <Image src={`/assets/categoryImages/${activity.category}.jpg`} />
-            <Card.Content>
-                <Card.Header>{activity.title}</Card.Header>
-                <Card.Meta>
-                    <span >{activity.date}</span>
-                </Card.Meta>
-                <Card.Description>
-                    {activity.description}
-                </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-                <Button.Group widths='2'>
-                    <Button as={Link} to={`/manage/${activity.id}`} basic color="blue" content='Edit' />
-                    <Button as={Link} to='/activities' basic color="grey" content='Cancel' />
-                </Button.Group>
-            </Card.Content>
-        </Card>
+        <Grid>
+            <Grid.Column width={10}>
+                <ActivityDetailedHeader activity={activity} />
+                <ActivityDetailInfo activity={activity} />
+                <ActivityDetailChat />
+            </Grid.Column>
+            <Grid.Column width={6}>
+                <ActivityDetailSidebar />
+            </Grid.Column>
+        </Grid>
     )
 })
