@@ -6,22 +6,21 @@ import { store } from "./store";
 
 export default class UserStore {
 
-    user: User | null = null;
+    currentUser: User | null = null;
 
     constructor() {
         makeAutoObservable(this)
     }
 
     get isLoggedIn() {
-        return !!this.user;
+        return !!this.currentUser;
     }
 
     login = async (creds: UserFormValues, navigate: NavigateFunction) => {
         try {
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
-
-            runInAction(() => this.user = user);
+            runInAction(() => this.currentUser = user);
 
             navigate('/activities');
             store.modalStore.closeModal();
@@ -35,14 +34,14 @@ export default class UserStore {
     logout = (navigate: NavigateFunction) => {
         store.commonStore.setToken(null);
         window.localStorage.removeItem('jwt');
-        this.user = null;
+        this.currentUser = null;
         navigate('/');
     }
 
     getUser = async () => {
         try {
             const user = await agent.Account.current();
-            runInAction(() => this.user = user);
+            runInAction(() => this.currentUser = user);
         } catch (error) {
             console.log(error);
         }
@@ -53,7 +52,7 @@ export default class UserStore {
             const user = await agent.Account.register(creds);
             store.commonStore.setToken(user.token);
 
-            runInAction(() => this.user = user);
+            runInAction(() => this.currentUser = user);
 
             navigate('/activities');
             store.modalStore.closeModal();

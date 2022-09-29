@@ -6,7 +6,7 @@ import { Button, Container, Dropdown, Image, Menu } from "semantic-ui-react";
 import { useStore } from "../../stores/store";
 
 export default observer(function NavBar() {
-    const { userStore: { user, logout } } = useStore();
+    const { userStore: { currentUser, logout } } = useStore();
     const navigate = useNavigate();
 
     return (
@@ -22,10 +22,10 @@ export default observer(function NavBar() {
                     <Button as={NavLink} to='/createActivity' positive content='Create Activity' />
                 </Menu.Item>
                 <Menu.Item position="right">
-                    <Image src={user?.image || 'assets/user.png'} avatar spaced='right' />
-                    <Dropdown pointing='top left' text={user?.displayName}>
+                    <Image src={currentUser?.image || 'assets/user.png'} avatar spaced='right' />
+                    <Dropdown pointing='top left' text={currentUser?.displayName}>
                         <Dropdown.Menu>
-                            <Dropdown.Item as={Link} to={`/profile/${user?.userName}`} text='My Profile' icon='user' />
+                            <Dropdown.Item as={Link} to={`/profile/${currentUser?.username}`} text='My Profile' icon='user' />
                             <Dropdown.Item onClick={() => logout(navigate)} text='Logout' icon='power' />
                         </Dropdown.Menu>
                     </Dropdown>

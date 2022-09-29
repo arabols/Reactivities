@@ -12,9 +12,9 @@ interface Store {
 }
 
 export const store: Store = {
+    userStore: new UserStore(),
     activityStore: new ActivityStore(),
     commonStore: new CommonStore(),
-    userStore: new UserStore(),
     modalStore: new ModalStore()
 }
 

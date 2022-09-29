@@ -13,18 +13,18 @@ import ActivityDetailSidebar from "./ActivityDetailSidebar";
 
 export default observer(function ActivityDetails() {
     const { activityStore } = useStore();
-    const { selectedActivity: activity, loadActivity, loadingInitial, setLoadingInitial } = activityStore;
+    const { selectedActivity: activity, loadActivity, loadingInitial } = activityStore;
     const { id } = useParams<{ id: string }>();
 
 
     useEffect(() => {
-        debugger;
         if (id) {
             loadActivity(id);
         }
     }, [id, loadActivity]);
 
-    if (loadingInitial || !activity) return <LoadingComponent contents={""} />
+    debugger
+    if (loadingInitial || !activity) return <LoadingComponent contents={"Loading Activity..."} />
 
     return (
         <Grid>
@@ -34,7 +34,7 @@ export default observer(function ActivityDetails() {
                 <ActivityDetailChat />
             </Grid.Column>
             <Grid.Column width={6}>
-                <ActivityDetailSidebar />
+                <ActivityDetailSidebar activity={activity!} />
             </Grid.Column>
         </Grid>
     )
