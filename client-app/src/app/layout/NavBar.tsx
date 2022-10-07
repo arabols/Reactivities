@@ -25,7 +25,7 @@ export default observer(function NavBar() {
                     <Image src={currentUser?.image || 'assets/user.png'} avatar spaced='right' />
                     <Dropdown pointing='top left' text={currentUser?.displayName}>
                         <Dropdown.Menu>
-                            <Dropdown.Item as={Link} to={`/profile/${currentUser?.username}`} text='My Profile' icon='user' />
+                            <Dropdown.Item as={Link} to={`/profiles/${currentUser?.username}`} text='My Profile' icon='user' />
                             <Dropdown.Item onClick={() => logout(navigate)} text='Logout' icon='power' />
                         </Dropdown.Menu>
                     </Dropdown>

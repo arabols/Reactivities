@@ -14,8 +14,8 @@ import ServerError from '../../features/errors/ServerError';
 import LoginForm from '../../features/users/LoginForm';
 import { useStore } from '../../stores/store';
 import LoadingComponent from './LoadingComponents';
-import ModalStore from '../../stores/modalStore';
 import ModalContainer from '../common/modals/ModalContainer';
+import ProfilePage from '../../features/profiles/ProfilePage';
 
 function App() {
 
@@ -54,6 +54,7 @@ function App() {
                   <Route path='/login' element={<LoginForm />} />
                   <Route path='server-error' element={<ServerError />} />
                   <Route path='/not-found' element={<NotFound />} />
+                  <Route path='/profiles/:username' element={<ProfilePage />} />
                 </Routes>
               </Container>
             </>

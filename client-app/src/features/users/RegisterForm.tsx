@@ -2,10 +2,9 @@ import { ErrorMessage, Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Label, Header } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 import MyTextInput from "../../app/common/forms/MyTextInput";
 import { useStore } from "../../stores/store";
-import ServerError from "../errors/ServerError";
 import * as Yup from 'yup';
 import ValidationErrors from "../errors/ValidationErrors";
 

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { Button, Label, Header } from "semantic-ui-react";
 import MyTextInput from "../../app/common/forms/MyTextInput";
 import { useStore } from "../../stores/store";
-import ServerError from "../errors/ServerError";
 
 export default observer(function LoginForm() {
     const { userStore } = useStore();
