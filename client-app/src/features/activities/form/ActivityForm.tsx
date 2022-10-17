@@ -65,7 +65,7 @@ export default observer(function ActivityForm() {
                 onSubmit={values => handleFormSubmit(values)}
             >
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
-                    <Form className='ui from' onSubmit={handleSubmit} autoComplete='off'>
+                    <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                         <MyTextInput name="title" placeholder="title" />
                         <MyTextArea placeholder='Description' name='description' rows={3} />
                         <MySelectInput placeholder='Category' name='category' options={categoryOptions} />

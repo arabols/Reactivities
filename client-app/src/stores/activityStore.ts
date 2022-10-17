@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../app/api/agent";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { format } from 'date-fns';
@@ -48,6 +48,7 @@ export default class ActivityStore {
     }
 
     loadActivity = async (id: string) => {
+        debugger;
         let activity = this.getActivity(id);
         if (activity) {
             this.selectedActivity = activity;
@@ -83,11 +84,14 @@ export default class ActivityStore {
         this.activityRegistry.set(activity.id, activity);
     }
     private getActivity = (id: string) => {
-        debugger;
+        if (this.activityRegistry.size == 0)
+            this.loadActivitieis().then(x => { return this.activityRegistry.get(id); });
+
         return this.activityRegistry.get(id);
     }
 
     setLoadingInitial = (state: boolean) => {
+        debugger;
         this.loadingInitial = state;
     }
 
@@ -180,5 +184,9 @@ export default class ActivityStore {
         } finally {
             this.loading = false;
         }
+    }
+
+    clearSelectedActivity = () => {
+        this.selectedActivity = undefined;
     }
 }

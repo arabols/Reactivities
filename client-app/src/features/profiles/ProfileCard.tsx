@@ -14,7 +14,7 @@ export default observer(function ProfileCard({ profile }: Props) {
             <Image src={profile.image || '/assets/user.png'} />
             <Card.Content>
                 <Card.Header>{profile.displayName}</Card.Header>
-                <CardDescription>{profile.bio?.substring(0, 80)}</CardDescription>
+                <CardDescription>{profile.bio && (profile.bio.length > 80) ? profile.bio.slice(0, 80) + '...' : profile.bio}</CardDescription>
             </Card.Content>
             <Card.Content extra>
                 <Icon name='user' />
