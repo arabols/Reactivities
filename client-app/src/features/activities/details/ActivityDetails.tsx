@@ -24,7 +24,7 @@ export default observer(function ActivityDetails() {
         return () => {
             clearSelectedActivity()
         }
-    }, [id, loadActivity]);
+    }, [id, loadActivity, clearSelectedActivity]);
 
     debugger;
     if (loadingInitial || !activity) return <LoadingComponent contents={"Loading Activity..."} />

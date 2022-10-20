@@ -1,4 +1,4 @@
-import { makeAutoObservable, reaction, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../app/api/agent";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { format } from 'date-fns';
@@ -84,7 +84,7 @@ export default class ActivityStore {
         this.activityRegistry.set(activity.id, activity);
     }
     private getActivity = (id: string) => {
-        if (this.activityRegistry.size == 0)
+        if (this.activityRegistry.size === 0)
             this.loadActivitieis().then(x => { return this.activityRegistry.get(id); });
 
         return this.activityRegistry.get(id);
@@ -188,5 +188,16 @@ export default class ActivityStore {
 
     clearSelectedActivity = () => {
         this.selectedActivity = undefined;
+    }
+
+    updateAttendeeFollowing = (username: string) => {
+        this.activityRegistry.forEach(activity => {
+            activity.attendees?.forEach(attendee => {
+                if (attendee.username === username) {
+                    attendee.following ? attendee.followersCount-- : attendee.followersCount++;
+                    attendee.following = !attendee.following;
+                }
+            })
+        })
     }
 }
